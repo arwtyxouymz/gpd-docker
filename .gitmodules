@@ -1,0 +1,9 @@
+[submodule "hayate_planning_interface"]
+	path = hayate_planning_interface
+	url = git@github.pfidev.jp:hayate/hayate_planning_interface.git
+[submodule "caffe"]
+	path = caffe
+	url = git@github.pfidev.jp:kusano/caffe.git
+[submodule "gpg"]
+	path = gpg
+	url = git@github.pfidev.jp:kusano/gpg.git
