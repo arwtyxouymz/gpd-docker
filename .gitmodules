@@ -7,3 +7,6 @@
 [submodule "gpg"]
 	path = gpg
 	url = git@github.pfidev.jp:kusano/gpg.git
+[submodule "gpd"]
+	path = gpd
+	url = https://github.com/arwtyxouymz/gpd-submodule
