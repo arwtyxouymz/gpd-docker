@@ -50,7 +50,7 @@ WORKDIR $CAFFE_ROOT
 RUN mkdir build
 WORKDIR $CAFFE_ROOT/build
 RUN cmake -DUSE_CUDNN=1 -D CMAKE_BUILD_TYPE=RELEASE ..
-RUN make -j4
+RUN make -j8
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
 ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
@@ -61,8 +61,10 @@ COPY gpg gpg
 RUN mkdir gpg/build
 WORKDIR gpg/build
 RUN cmake ..
-RUN make
+RUN make -j8
 RUN make install
+
+RUN pip install pytest
 
 RUN mkdir -p /catkin_ws/src
 WORKDIR /catkin_ws/src
@@ -70,8 +72,6 @@ COPY gpd gpd
 WORKDIR /catkin_ws
 
 RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && catkin_make"
-
-RUN pip install pytest
 
 ENTRYPOINT ["devel/env.sh"]
 CMD ["roslaunch", "gpd", "ur5_15_channels.launch"]
