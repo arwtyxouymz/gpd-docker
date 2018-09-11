@@ -28,12 +28,6 @@ void CandidatesGenerator::preprocessPointCloud(CloudCamera& cloud_cam)
   {
     //    Plot plotter;
     //    plotter.drawCloud(cloud_cam.getCloudProcessed(), "before");
-    // Voxel Grid
-    pcl::VoxelGrid<pcl::PointXYZRGBA> sor_v;
-    sor_v.setInputCloud (cloud_cam.getCloudProcessed());
-    sor_v.setLeafSize (0.01f, 0.01f, 0.01f);
-    sor_v.filter (*cloud_cam.getCloudProcessed());
-    std::cout << "Cloud after Voxel Grid filtering: " << cloud_cam.getCloudProcessed()->size() << std::endl;
 
     // Create the filtering object
     pcl::StatisticalOutlierRemoval<pcl::PointXYZRGBA> sor;
@@ -116,11 +110,11 @@ void CandidatesGenerator::preprocessPointCloud(CloudCamera& cloud_cam)
   {
     cloud_cam.calculateNormals(params_.num_threads_);
   }
-  /*
+
   if (params_.plot_normals_)
   {
 	  plotter_.plotNormals(cloud_cam.getCloudProcessed(), cloud_cam.getNormals());
-  }*/
+  }
 }
 
 
@@ -146,12 +140,12 @@ std::vector<Grasp> CandidatesGenerator::generateGraspCandidates(const CloudCamer
   }
   std::cout << "Generated " << candidates.size() << " grasp candidates.\n";
 
-  /*if (params_.plot_grasps_)
+  if (params_.plot_grasps_)
   {
     const HandSearch::Parameters& params = hand_search_->getParams();
     plotter_.plotFingers3D(candidates, cloud_cam.getCloudOriginal(), "Grasp Candidates", params.hand_outer_diameter_,
       params.finger_width_, params.hand_depth_, params.hand_height_);
-  }*/
+  }
 
   return candidates;
 }
@@ -162,13 +156,12 @@ std::vector<GraspSet> CandidatesGenerator::generateGraspCandidateSets(const Clou
   // Find sets of grasp candidates.
   std::vector<GraspSet> hand_set_list = hand_search_->searchHands(cloud_cam);
 
-  /*
-   if (params_.plot_grasps_)
+  if (params_.plot_grasps_)
   {
     const HandSearch::Parameters& params = hand_search_->getParams();
     plotter_.plotFingers3D(hand_set_list, cloud_cam.getCloudOriginal(), "Grasp Candidates", params.hand_outer_diameter_,
       params.finger_width_, params.hand_depth_, params.hand_height_);
-  }*/
+  }
 
   return hand_set_list;
 }

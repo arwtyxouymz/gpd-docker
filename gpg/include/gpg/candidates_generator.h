@@ -41,9 +41,6 @@
 // PCL
 #include <pcl/common/common.h>
 #include <pcl/filters/statistical_outlier_removal.h>
-#include <pcl/filters/voxel_grid.h>
-
-
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
@@ -53,7 +50,7 @@
 #include <gpg/grasp.h>
 #include <gpg/grasp_set.h>
 #include <gpg/hand_search.h>
-// #include <gpg/plot.h>
+#include <gpg/plot.h>
 
 
 /** CandidatesGenerator class
@@ -142,7 +139,7 @@ class CandidatesGenerator
   private:
 
     HandSearch* hand_search_; ///< pointer to an object for the hand search
-    // Plot plotter_; ///< pointer to an object for plotting
+    Plot plotter_; ///< pointer to an object for plotting
 
     Parameters params_; ///< parameters for the grasp candidates generation
 };

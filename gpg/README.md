@@ -1,5 +1,3 @@
-## 可視化を切るために、独自コードを使っています
-
 # Grasp Pose Generator (GPG)
 
 * **Author:** Andreas ten Pas (atp@ccs.neu.edu)

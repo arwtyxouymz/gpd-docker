@@ -50,7 +50,7 @@
 #include <gpg/grasp.h>
 #include <gpg/grasp_set.h>
 #include <gpg/local_frame.h>
-// #include <gpg/plot.h>
+#include <gpg/plot.h>
 #include <gpg/point_list.h>
 
 
@@ -176,7 +176,7 @@ private:
   double nn_radius_; ///< radius for nearest neighbors search
 
   Eigen::Matrix3Xd cloud_normals_; ///< a 3xn matrix containing the normals for points in the point cloud
-  // Plot plot_; ///< plot object for visualization of search results
+  Plot plot_; ///< plot object for visualization of search results
 
   /** plotting parameters (optional, not read in from config file) **/
   bool plots_samples_; ///< are the samples drawn from the point cloud plotted?

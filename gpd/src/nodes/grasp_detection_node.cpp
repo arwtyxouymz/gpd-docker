@@ -189,7 +189,7 @@ std::vector<Grasp> GraspDetectionNode::detectGraspPosesInTopic()
   }
 
   // Publish the selected grasps.
-  gpd::GraspConfigList selected_grasps_msg = createGraspListMsg(grasps);
+  // gpd::GraspConfigList selected_grasps_msg = createGraspListMsg(grasps);
   gpd::GraspSetList custom_grasps_msg = createGraspSetListMsg(grasps);
   // grasps_pub_.publish(selected_grasps_msg);
   grasps_pub_.publish(custom_grasps_msg);
@@ -414,6 +414,7 @@ gpd::GraspSet GraspDetectionNode::convertToGraspSetMsg(const Grasp& hand)
     tf::vectorEigenToMsg(hand.getApproach(), msg.approach);
     msg.pose = convert_to_ros_msg(hand);
     msg.score.data = hand.getScore();
+    msg.grasp = convertToGraspMsg(hand);
     return msg;
 }
 
@@ -559,7 +560,7 @@ geometry_msgs::PoseStamped GraspDetectionNode::convert_to_ros_msg(const Grasp &g
     right_top = right_bottom + hand_depth * grasp.getApproach();
     left_center = left_bottom + 0.5 * (left_top - left_bottom);
     right_center = right_bottom + 0.5 * (right_top - right_bottom);
-    base_center = left_bottom + 0.5 * (right_bottom - left_bottom) - 0.03 * grasp.getApproach();
+    base_center = left_bottom + 0.5 * (right_bottom - left_bottom) - 0.01 * grasp.getApproach();
     Eigen::Quaterniond quat(grasp.getFrame());
 
     geometry_msgs::PoseStamped pre_pose;

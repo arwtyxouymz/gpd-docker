@@ -34,13 +34,13 @@ std::vector<GraspSet> HandSearch::searchHands(const CloudCamera& cloud_cam, bool
   kdtree.setInputCloud(cloud);
 
   // Plot normals and/or samples if desired.
-  /*if (plots_normals)
+  if (plots_normals)
   {
     std::cout << "Plotting normals ...\n";
     plot_.plotNormals(cloud_cam.getNormals(), cloud_normals_);
-  }*/
+  }
 
-  /*if (plots_samples)
+  if (plots_samples)
   {
     if (cloud_cam.getSampleIndices().size() > 0)
     {
@@ -52,7 +52,7 @@ std::vector<GraspSet> HandSearch::searchHands(const CloudCamera& cloud_cam, bool
       std::cout << "Plotting samples ...\n";
       plot_.plotSamples(cloud_cam.getSamples(), cloud_cam.getCloudProcessed());
     }
-  }*/
+  }
 
   // 1. Estimate local reference frames.
   std::cout << "Estimating local reference frames ...\n";
@@ -70,9 +70,9 @@ std::vector<GraspSet> HandSearch::searchHands(const CloudCamera& cloud_cam, bool
     return hypothesis_set_list;
   }
 
-  /*if (plots_local_axes_)
+  if (plots_local_axes_)
     plot_.plotLocalAxes(frames, cloud_cam.getCloudOriginal());
-  */
+
   // 2. Evaluate possible hand placements.
   std::cout << "Finding hand poses ...\n";
   std::vector<GraspSet> hypothesis_set_list = evaluateHands(cloud_cam, frames, kdtree);
@@ -93,7 +93,7 @@ std::vector<Grasp> HandSearch::reevaluateHypotheses(const CloudCamera& cloud_cam
   pcl::KdTreeFLANN<pcl::PointXYZRGBA> kdtree;
   kdtree.setInputCloud(cloud);
 
-  /*if (plot_samples)
+  if (plot_samples)
   {
     Plot plotter;
     Eigen::Matrix3Xd samples(3, grasps.size());
@@ -104,7 +104,6 @@ std::vector<Grasp> HandSearch::reevaluateHypotheses(const CloudCamera& cloud_cam
 
     plotter.plotSamples(samples, cloud);
   }
-  */
 
   std::vector<int> nn_indices;
   std::vector<float> nn_dists;
