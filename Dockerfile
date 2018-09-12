@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu14.04
+FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
 RUN apt-get update && apt-get install -y wget&&\
     rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -27,18 +27,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Installation of ROS
-RUN /bin/bash -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
-RUN wget http://packages.ros.org/ros.key -O - | apt-key add -
+RUN /bin/bash -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA117
 RUN apt-get update && apt-get install -y vim\
     libeigen3-dev\
-    ros-indigo-desktop-full\
-    ros-indigo-cv-bridge\
+    ros-kinetic-desktop-full\
+    ros-kinetic-cv-bridge\
     python-tk\
     x11-apps\
-    ros-indigo-rqt-rviz\
-    ros-indigo-pcl-ros\
-    ros-indigo-tf-conversions\
-    ros-indigo-rqt-graph&&\
+    ros-kinetic-rqt-rviz\
+    ros-kinetic-pcl-ros\
+    ros-kinetic-tf-conversions\
+    ros-kinetic-rqt-graph&&\
     rm -rf /var/lib/apt/lists/*
 
 # Installation of Caffe
@@ -71,7 +71,7 @@ WORKDIR /catkin_ws/src
 COPY gpd gpd
 WORKDIR /catkin_ws
 
-RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && catkin_make"
+RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
 
 ENTRYPOINT ["devel/env.sh"]
 CMD ["roslaunch", "gpd", "ur5_15_channels.launch"]
