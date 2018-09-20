@@ -65,6 +65,8 @@ RUN make -j8
 RUN make install
 
 RUN pip install pytest
+RUN echo "source /opt/ros/indigo/setup.bash" >> /root/.bashrc
+RUN echo "source /catkin_ws/devel/setup.bash" >> /root/.bashrc
 
 RUN mkdir -p /catkin_ws/src
 WORKDIR /catkin_ws/src
