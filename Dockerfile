@@ -67,6 +67,7 @@ RUN make install
 RUN pip install pytest
 RUN echo "source /opt/ros/indigo/setup.bash" >> /root/.bashrc
 RUN echo "source /catkin_ws/devel/setup.bash" >> /root/.bashrc
+RUN sed -i -r '117s/"(.+)"/"d155b9ce5188fbaf89745847fd5882d7"/g' /opt/ros/indigo/include/visualization_msgs/MarkerArray.h
 
 RUN mkdir -p /catkin_ws/src
 WORKDIR /catkin_ws/src
